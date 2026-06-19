@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        id="cordova-plugin-push-notification-v2026"
+        version="1.0.0">
+
+    <name>PushNotification</name>
+    <description>Zero-config push notifications for Apache Cordova — FCM on Android, native APNs on iOS.</description>
+    <license>MIT</license>
+    <keywords>cordova,push,push-notification,fcm,firebase,apns,notifications</keywords>
+    <repo>https://github.com/dedrisproject/cordova-plugin-push-notification-v2026.git</repo>
+    <issue>https://github.com/dedrisproject/cordova-plugin-push-notification-v2026/issues</issue>
+
+    <engines>
+        <engine name="cordova" version=">=12.0.0" />
+        <engine name="cordova-android" version=">=14.0.0" />
+    </engines>
+
+    <!-- Shared JavaScript interface -->
+    <js-module src="www/push-notification.js" name="PushNotification">
+        <clobbers target="cordova.plugins.pushNotification" />
+    </js-module>
+
+    <!-- ===================================================================== -->
+    <!-- ANDROID                                                               -->
+    <!-- ===================================================================== -->
+    <platform name="android">
+
+        <config-file target="config.xml" parent="/*">
+            <feature name="PushNotificationPlugin">
+                <param name="android-package" value="com.dedrisproject.pushnotification.PushNotificationPlugin" />
+                <param name="onload" value="true" />
+            </feature>
+        </config-file>
+
+        <!-- Permissions -->
+        <config-file target="AndroidManifest.xml" parent="/manifest">
+            <uses-permission android:name="android.permission.INTERNET" />
+            <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+            <uses-permission android:name="android.permission.VIBRATE" />
+        </config-file>
+
+        <!-- Firebase Messaging service -->
+        <config-file target="AndroidManifest.xml" parent="/manifest/application">
+            <service
+                android:name="com.dedrisproject.pushnotification.PushFirebaseMessagingService"
+                android:exported="false">
+                <intent-filter>
+                    <action android:name="com.google.firebase.MESSAGING_EVENT" />
+                </intent-filter>
+            </service>
+        </config-file>
+
+        <!-- Native sources -->
+        <source-file src="src/android/PushNotificationPlugin.java"
+                     target-dir="java/com/dedrisproject/pushnotification" />
+        <source-file src="src/android/PushFirebaseMessagingService.java"
+                     target-dir="java/com/dedrisproject/pushnotification" />
+
+        <!-- Firebase + AndroidX dependencies -->
+        <framework src="com.google.firebase:firebase-messaging:24.1.0" />
+        <framework src="androidx.core:core:1.13.1" />
+
+        <!-- Auto-applies the google-services Gradle plugin (reads google-services.json) -->
+        <framework src="src/android/push-notification-build.gradle" custom="true" type="gradleReference" />
+
+    </platform>
+
+    <!-- ===================================================================== -->
+    <!-- iOS                                                                   -->
+    <!-- ===================================================================== -->
+    <platform name="ios">
+
+        <config-file target="config.xml" parent="/*">
+            <feature name="PushNotificationPlugin">
+                <param name="ios-package" value="PushNotificationPlugin" />
+                <param name="onload" value="true" />
+            </feature>
+        </config-file>
+
+        <!-- Native sources -->
+        <header-file src="src/ios/PushNotificationPlugin.h" />
+        <source-file src="src/ios/PushNotificationPlugin.m" />
+
+        <!-- System framework for local & remote notifications -->
+        <framework src="UserNotifications.framework" />
+
+        <!-- Enable the background "remote notification" mode -->
+        <config-file target="*-Info.plist" parent="UIBackgroundModes">
+            <array>
+                <string>remote-notification</string>
+            </array>
+        </config-file>
+
+        <!-- Push Notifications capability (entitlement) — added automatically -->
+        <config-file target="*/Entitlements-Debug.plist" parent="aps-environment">
+            <string>development</string>
+        </config-file>
+        <config-file target="*/Entitlements-Release.plist" parent="aps-environment">
+            <string>production</string>
+        </config-file>
+
+    </platform>
+
+    <!-- ===================================================================== -->
+    <!-- HOOKS                                                                 -->
+    <!-- ===================================================================== -->
+    <!-- Copies google-services.json into the Android app module on every build -->
+    <hook type="after_prepare" src="hooks/android-copy-google-services.js" />
+    <hook type="before_compile" src="hooks/android-copy-google-services.js" />
+
+</plugin>

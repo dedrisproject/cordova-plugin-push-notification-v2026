@@ -1,0 +1,63 @@
+{
+  "name": "cordova-plugin-push-notification-v2026",
+  "version": "1.0.0",
+  "description": "Zero-config push notifications for Apache Cordova — FCM on Android, native APNs on iOS. Auto-wires permissions, entitlements and the Firebase google-services plugin so you only write JavaScript.",
+  "cordova": {
+    "id": "cordova-plugin-push-notification-v2026",
+    "platforms": [
+      "android",
+      "ios"
+    ]
+  },
+  "main": "www/push-notification.js",
+  "types": "types/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dedrisproject/cordova-plugin-push-notification-v2026.git"
+  },
+  "bugs": {
+    "url": "https://github.com/dedrisproject/cordova-plugin-push-notification-v2026/issues"
+  },
+  "homepage": "https://github.com/dedrisproject/cordova-plugin-push-notification-v2026#readme",
+  "keywords": [
+    "cordova",
+    "phonegap",
+    "ecosystem:cordova",
+    "cordova-android",
+    "cordova-ios",
+    "push",
+    "push-notification",
+    "push-notifications",
+    "notifications",
+    "fcm",
+    "firebase",
+    "firebase-cloud-messaging",
+    "apns",
+    "apple-push",
+    "remote-notification"
+  ],
+  "engines": {
+    "cordovaDependencies": {
+      "1.0.0": {
+        "cordova": ">=12.0.0",
+        "cordova-android": ">=14.0.0",
+        "cordova-ios": ">=7.0.0"
+      }
+    }
+  },
+  "author": "dedrisproject",
+  "license": "MIT",
+  "files": [
+    "www/",
+    "src/",
+    "hooks/",
+    "types/",
+    "plugin.xml",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
+  "scripts": {
+    "test": "echo \"No automated tests — see example/ for a runnable sample app\" && exit 0"
+  }
+}

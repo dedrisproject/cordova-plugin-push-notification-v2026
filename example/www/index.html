@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="viewport"
+          content="initial-scale=1, width=device-width, viewport-fit=cover, user-scalable=no" />
+    <meta http-equiv="Content-Security-Policy"
+          content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data:;" />
+    <link rel="stylesheet" href="css/index.css" />
+    <title>Push Demo</title>
+</head>
+<body>
+    <header>
+        <h1>🔔 Push Notification Demo</h1>
+        <p class="subtitle">cordova-plugin-push-notification-v2026</p>
+    </header>
+
+    <main>
+        <section class="card">
+            <div class="row">
+                <span class="label">Status</span>
+                <span id="status" class="badge badge-idle">Initialising…</span>
+            </div>
+            <div class="row">
+                <span class="label">Platform</span>
+                <span id="platform" class="value">—</span>
+            </div>
+            <div class="token-block">
+                <span class="label">Device token</span>
+                <code id="token" class="token">—</code>
+                <button id="copyBtn" class="btn btn-ghost" disabled>Copy token</button>
+            </div>
+        </section>
+
+        <section class="card">
+            <h2>Actions</h2>
+            <div class="actions">
+                <button id="registerBtn" class="btn btn-primary">Register</button>
+                <button id="permBtn" class="btn">Check permission</button>
+                <button id="badgeBtn" class="btn">Set badge (3)</button>
+                <button id="clearBtn" class="btn">Clear notifications</button>
+            </div>
+            <div class="topic-row">
+                <input id="topicInput" type="text" placeholder="topic name e.g. news" />
+                <button id="subBtn" class="btn">Subscribe</button>
+                <button id="unsubBtn" class="btn">Unsubscribe</button>
+            </div>
+        </section>
+
+        <section class="card">
+            <div class="row">
+                <h2>Event log</h2>
+                <button id="clearLogBtn" class="btn btn-ghost">Clear</button>
+            </div>
+            <ul id="log" class="log"></ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>⭐ Like this plugin?
+            <a href="https://github.com/dedrisproject/cordova-plugin-push-notification-v2026">Star it on GitHub</a>
+        </p>
+    </footer>
+
+    <script src="cordova.js"></script>
+    <script src="js/index.js"></script>
+</body>
+</html>

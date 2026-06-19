@@ -1,0 +1,14 @@
+# Keep the published package lean — ship only the plugin, not the demo app.
+example/
+.github/
+.gitignore
+*.log
+.DS_Store
+
+# Never publish secrets
+google-services.json
+GoogleService-Info.plist
+*.keystore
+*.jks
+*.p8
+*.p12

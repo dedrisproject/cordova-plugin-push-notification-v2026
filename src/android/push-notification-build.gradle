@@ -1,0 +1,30 @@
+// Injected into the Cordova Android app module by the plugin.
+// Adds the google-services classpath and applies the plugin so that
+// google-services.json is processed automatically at build time.
+
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        // Reads google-services.json and wires Firebase into the build.
+        classpath 'com.google.gms:google-services:4.4.2'
+    }
+}
+
+repositories {
+    google()
+    mavenCentral()
+}
+
+// Only apply if google-services.json is present, so a freshly cloned project
+// still builds (with push disabled) before Firebase is configured.
+def googleServicesJson = file("${project.projectDir}/google-services.json")
+if (googleServicesJson.exists()) {
+    apply plugin: 'com.google.gms.google-services'
+    println "[push-notification] google-services.json found — Firebase enabled."
+} else {
+    println "[push-notification] WARNING: google-services.json not found in app module. " +
+            "Add it to your project root (see plugin README) to enable push on Android."
+}

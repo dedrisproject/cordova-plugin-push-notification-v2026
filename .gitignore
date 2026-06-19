@@ -1,0 +1,25 @@
+# Dependencies
+node_modules/
+
+# Cordova build artifacts (in the sample app)
+example/platforms/
+example/plugins/
+example/www/cordova.js
+example/node_modules/
+
+# Firebase / signing secrets — never commit these
+google-services.json
+GoogleService-Info.plist
+*.keystore
+*.jks
+*.p8
+*.p12
+*.mobileprovision
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.log
+.idea/
+.vscode/
+*.iml
